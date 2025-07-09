@@ -64,13 +64,10 @@ def call(Map config = [:]) {
                 stage('Package-Push-chart') {
                     steps {
                         container('helm') {
-                            helmWithKubeconfig {
-                                sh '''
-                                    helm package ./my-chart
-                                    curl -u $USERNAME:$PASSWORD --upload-file my-chart-0.1.0.tgz http://nexus-nexus-repository-manager:8081/repository/helm-repo/
-                                    
-                                '''
-                            }  
+                             script {
+                                def packagePushChartStage = new PackagePushChart(this)
+                                packagePushChartStage.execute()
+                            }
                         }
                     }
                 }
