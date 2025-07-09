@@ -12,8 +12,7 @@ class BuildImage implements Serializable {
             steps.script {
                 // Build the Docker image and store it in a variable accessible outside if needed
                 def myImage = steps.docker.build("${nexusRegistry}/quarkus:${imageTag}")
-                // You can return the image reference if you want
-                return myImage
+                
             }
         }
     }
