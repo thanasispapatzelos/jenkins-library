@@ -79,7 +79,7 @@ def call(Map config = [:]) {
                     steps {
                         container('helm') {
                             helmWithKubeconfig {
-                                echo "Deploying to ${env.ENV_NAME}"
+                                echo "Deploying to ${config.envName}"
                                 sh 'helm repo add --username $USERNAME --password $PASSWORD helm-nexus http://nexus-nexus-repository-manager:8081/repository/helm-repo/'
                                 sh 'helm repo update'
                                 sh 'helm repo list'
