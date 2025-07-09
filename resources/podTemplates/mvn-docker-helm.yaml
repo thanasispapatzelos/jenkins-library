@@ -19,3 +19,15 @@ spec:
       command:
         - cat
       tty: true
+    - name: docker-cli
+      image: docker:25.0.3-cli  # Lightweight Docker CLI-only image
+      volumeMounts:
+        - name: docker-socket
+          mountPath: /var/run/docker.sock
+      command: ["cat"]
+      tty: true  
+  volumes:
+    - name: docker-socket
+      hostPath:
+        path: /var/run/docker.sock
+        type: Socket     
