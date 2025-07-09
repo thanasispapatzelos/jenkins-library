@@ -52,9 +52,11 @@ def call(Map config = [:]) {
                     steps {
                         container('docker-cli') {
                             script {
-                                        myImage = docker.build("${NEXUS_REGISTRY}/quarkus:${IMAGE_TAG}")
-
-                                    }
+                            def buildImageStage = new BuildImage(this)
+                            def myImage = buildImageStage.execute(env.NEXUS_REGISTRY, env.IMAGE_TAG)
+                            // If you want to keep using myImage later, you can save it in env or elsewhere
+                            env.MY_IMAGE = myImage.toString()  // or however you want to handle it
+                        }
                         
         
                         }
