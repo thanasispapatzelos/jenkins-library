@@ -1,4 +1,4 @@
-import org.mycompany.pipeline.Checkout
+import org.example.pipeline.Checkout
 
 def call(Map config = [:]) {
     pipeline {
@@ -30,7 +30,7 @@ def call(Map config = [:]) {
 
                         def checkoutStage = new Checkout(this)
                         checkoutStage.execute()
-                        
+
                     }
                 }
 
