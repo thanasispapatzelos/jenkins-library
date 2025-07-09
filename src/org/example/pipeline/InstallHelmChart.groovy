@@ -22,7 +22,7 @@ class InstallHelmChart implements Serializable {
                         --version 0.1.0 \\
                         -n jenkins \\
                         --set image.repository=nexus.docker:30050/quarkus \\
-                        --set image.tag=myversion
+                        --set image.tag=${env.BUILD_NUMBER}
                 """
             }
         }
