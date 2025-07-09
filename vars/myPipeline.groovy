@@ -1,4 +1,5 @@
-import org.example.pipeline.Checkout
+import org.example.pipeline.*
+
 
 def call(Map config = [:]) {
     pipeline {
@@ -39,7 +40,10 @@ def call(Map config = [:]) {
                 stage('Build-jar') {
                     steps {
                         container('mvn') {
-                            sh 'mvn clean package'
+                            script {
+                                def buildJarStage = new BuildJar(this)
+                                buildJarStage.execute()
+                            }
                         }
                     }
                 }
