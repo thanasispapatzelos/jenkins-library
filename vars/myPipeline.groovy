@@ -1,5 +1,6 @@
 import org.example.pipeline.*
 
+def myImage
 
 def call(Map config = [:]) {
     pipeline {
@@ -53,7 +54,7 @@ def call(Map config = [:]) {
                         container('docker-cli') {
                             script {
                             def buildImageStage = new BuildImage(this)
-                            def myImage = buildImageStage.execute(env.NEXUS_REGISTRY, env.IMAGE_TAG)
+                            myImage = buildImageStage.execute(env.NEXUS_REGISTRY, env.IMAGE_TAG)
                             }
                         }
                     }
