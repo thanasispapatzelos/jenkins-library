@@ -1,6 +1,7 @@
 import org.example.pipeline.*
 
 def myImage
+def imageTag = "${BUILD_NUMBER}"
 
 def call(Map config = [:]) {
     pipeline {
@@ -14,7 +15,7 @@ def call(Map config = [:]) {
             KUBECONFIG = "${WORKSPACE}/kubeconfig"  // kubectl will use this path
             DOCKER_CREDS_ID = 'nexus-creds' 
             NEXUS_REGISTRY = 'nexus.docker:30050'
-            IMAGE_TAG = 'myversion'
+            //IMAGE_TAG = 'myversion'
             }
 
             stages {
@@ -51,7 +52,7 @@ def call(Map config = [:]) {
                     steps {
                         script {
                         def buildImageStage = new BuildImage(this)
-                        myImage = buildImageStage.execute(env.NEXUS_REGISTRY, env.IMAGE_TAG)
+                        myImage = buildImageStage.execute(env.NEXUS_REGISTRY, imageTag)
                         }
                     }
                 }
@@ -70,7 +71,7 @@ def call(Map config = [:]) {
                 stage('Push-docker-image') {
                     steps {
                         script {
-                            def pushDockerStage = new PushDockerImage(this, myImage, env.NEXUS_REGISTRY, env.DOCKER_CREDS_ID, env.IMAGE_TAG)
+                            def pushDockerStage = new PushDockerImage(this, myImage, env.NEXUS_REGISTRY, env.DOCKER_CREDS_ID, imageTag)
                             pushDockerStage.execute()
                         }
                     }
