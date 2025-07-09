@@ -1,3 +1,5 @@
+import org.mycompany.pipeline.Checkout
+
 def call(Map config = [:]) {
     pipeline {
             agent {
@@ -25,11 +27,10 @@ def call(Map config = [:]) {
 
                 stage('Checkout') {
                     steps {
-                    
-                            checkout scm
-                            
+
+                        def checkoutStage = new Checkout(this)
+                        checkoutStage.execute()
                         
-                    
                     }
                 }
 
