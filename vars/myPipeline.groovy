@@ -1,7 +1,6 @@
 import org.example.pipeline.*
 
 def myImage
-def imageTag = "${BUILD_NUMBER}"
 
 def call(Map config = [:]) {
     pipeline {
@@ -52,7 +51,7 @@ def call(Map config = [:]) {
                     steps {
                         script {
                         def buildImageStage = new BuildImage(this)
-                        myImage = buildImageStage.execute(env.NEXUS_REGISTRY, imageTag)
+                        myImage = buildImageStage.execute(env.NEXUS_REGISTRY, env.BUILD_NUMBER)
                         }
                     }
                 }
@@ -71,7 +70,7 @@ def call(Map config = [:]) {
                 stage('Push-docker-image') {
                     steps {
                         script {
-                            def pushDockerStage = new PushDockerImage(this, myImage, env.NEXUS_REGISTRY, env.DOCKER_CREDS_ID, imageTag)
+                            def pushDockerStage = new PushDockerImage(this, myImage, env.NEXUS_REGISTRY, env.DOCKER_CREDS_ID, env.BUILD_NUMBER)
                             pushDockerStage.execute()
                         }
                     }
