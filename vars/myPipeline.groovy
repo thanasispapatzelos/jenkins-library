@@ -10,7 +10,7 @@ pipeline {
         DOCKER_CREDS_ID = 'nexus-creds' 
         NEXUS_REGISTRY = 'nexus.docker:30050'
         IMAGE_TAG = 'myversion'
-        ENV_NAME = config.envName ?: 'dev'
+        
     }
 
         stages {
