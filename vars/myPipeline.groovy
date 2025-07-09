@@ -19,13 +19,13 @@ def call(Map config = [:]) {
 
             stages {
 
-                   stage('Init') {
-                        steps {
-                            script {
-                                env.ENV_NAME = config.envName ?: 'dev'
-                            }
+                stage('Init') {
+                    steps {
+                        script {
+                            env.ENV_NAME = config.envName ?: 'dev'
                         }
                     }
+                }
 
                 stage('Checkout') {
                     steps {
