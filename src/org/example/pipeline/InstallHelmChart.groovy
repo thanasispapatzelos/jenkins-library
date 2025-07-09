@@ -18,7 +18,7 @@ class InstallHelmChart implements Serializable {
                     helm repo add --username \$USERNAME --password \$PASSWORD helm-nexus http://nexus-nexus-repository-manager:8081/repository/helm-repo/
                     helm repo update
                     helm repo list
-                    helm install helm-nexus helm-nexus/my-chart \\
+                    helm upgrade helm-nexus helm-nexus/my-chart \\
                         --version 0.1.0 \\
                         -n jenkins \\
                         --set image.repository=nexus.docker:30050/quarkus \\
