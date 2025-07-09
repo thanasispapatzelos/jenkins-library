@@ -27,9 +27,10 @@ def call(Map config = [:]) {
 
                 stage('Checkout') {
                     steps {
-
-                        def checkoutStage = new Checkout(this)
-                        checkoutStage.execute()
+                        script{
+                            def checkoutStage = new Checkout(this)
+                            checkoutStage.execute()
+                        }
 
                     }
                 }
