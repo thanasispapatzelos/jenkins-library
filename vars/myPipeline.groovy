@@ -40,22 +40,18 @@ def call(Map config = [:]) {
 
                 stage('Build-jar') {
                     steps {
-                        container('mvn') {
-                            script {
-                                def buildJarStage = new BuildJar(this)
-                                buildJarStage.execute()
-                            }
+                        script {
+                            def buildJarStage = new BuildJar(this)
+                            buildJarStage.execute()
                         }
                     }
                 }
 
                 stage('Build-image') {
                     steps {
-                        container('docker-cli') {
-                            script {
-                            def buildImageStage = new BuildImage(this)
-                            myImage = buildImageStage.execute(env.NEXUS_REGISTRY, env.IMAGE_TAG)
-                            }
+                        script {
+                        def buildImageStage = new BuildImage(this)
+                        myImage = buildImageStage.execute(env.NEXUS_REGISTRY, env.IMAGE_TAG)
                         }
                     }
                 }
@@ -63,11 +59,9 @@ def call(Map config = [:]) {
 
                 stage('Package-Push-chart') {
                     steps {
-                        container('helm') {
-                             script {
-                                def packagePushChartStage = new PackagePushChart(this)
-                                packagePushChartStage.execute()
-                            }
+                        script {
+                            def packagePushChartStage = new PackagePushChart(this)
+                            packagePushChartStage.execute()
                         }
                     }
                 }
@@ -75,13 +69,9 @@ def call(Map config = [:]) {
 
                 stage('Push-docker-image') {
                     steps {
-                        container('docker-cli') {
-                            steps {
-                                script {
-                                    def pushDockerStage = new PushDockerImage(this, myImage, env.NEXUS_REGISTRY, env.DOCKER_CREDS_ID, env.IMAGE_TAG)
-                                    pushDockerStage.execute()
-                                }
-                            }
+                        script {
+                            def pushDockerStage = new PushDockerImage(this, myImage, env.NEXUS_REGISTRY, env.DOCKER_CREDS_ID, env.IMAGE_TAG)
+                            pushDockerStage.execute()
                         }
                     }
                 }
