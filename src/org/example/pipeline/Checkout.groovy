@@ -1,3 +1,5 @@
+package org.example.pipeline
+
 class Checkout implements Serializable {
     def steps
     Checkout(steps) { 
