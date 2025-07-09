@@ -78,15 +78,9 @@ def call(Map config = [:]) {
 
                 stage('Add-install-nexus-chart') {
                     steps {
-                        container('helm') {
-                            helmWithKubeconfig {
-                                echo "Deploying to ${env.ENV_NAME}"
-                                sh 'helm repo add --username $USERNAME --password $PASSWORD helm-nexus http://nexus-nexus-repository-manager:8081/repository/helm-repo/'
-                                sh 'helm repo update'
-                                sh 'helm repo list'
-                                sh 'helm install helm-nexus helm-nexus/my-chart --version 0.1.0 -n jenkins --set image.repository=nexus.docker:30050/quarkus  --set image.tag=myversion'    
-
-                            }
+                        script {
+                            def installer = new InstallHelmChart(this, env)
+                            installer.execute()
                         }
                     }
                 }   
