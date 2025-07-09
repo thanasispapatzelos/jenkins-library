@@ -76,11 +76,11 @@ def call(Map config = [:]) {
                 stage('Push-docker-image') {
                     steps {
                         container('docker-cli') {
-                            script {
-                                    docker.withRegistry("http://${NEXUS_REGISTRY}", "${DOCKER_CREDS_ID}") {
-                                    myImage.push("${IMAGE_TAG}") 
-
-                                    }   
+                            steps {
+                                script {
+                                    def pushDockerStage = new PushDockerImage(this, myImage, env.NEXUS_REGISTRY, env.DOCKER_CREDS_ID, env.IMAGE_TAG)
+                                    pushDockerStage.execute()
+                                }
                             }
                         }
                     }
