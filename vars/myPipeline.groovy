@@ -12,15 +12,17 @@ def call(Map config = [:]) {
             NEXUS_REGISTRY = 'nexus.docker:30050'
             IMAGE_TAG = 'myversion'
             }
-            stage('Init') {
-                steps {
-                    script {
-                        env.ENV_NAME = config.envName ?: 'dev'
-                    }
-                }
-            }
 
             stages {
+
+                   stage('Init') {
+                        steps {
+                            script {
+                                env.ENV_NAME = config.envName ?: 'dev'
+                            }
+                        }
+                    }
+
                 stage('Checkout') {
                     steps {
                     
