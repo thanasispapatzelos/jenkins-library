@@ -12,6 +12,13 @@ def call(Map config = [:]) {
             NEXUS_REGISTRY = 'nexus.docker:30050'
             IMAGE_TAG = 'myversion'
             }
+            stage('Init') {
+                steps {
+                    script {
+                        env.ENV_NAME = config.envName ?: 'dev'
+                    }
+                }
+            }
 
             stages {
                 stage('Checkout') {
@@ -79,7 +86,7 @@ def call(Map config = [:]) {
                     steps {
                         container('helm') {
                             helmWithKubeconfig {
-                                echo "Deploying to ${config.envName}"
+                                echo "Deploying to ${env.ENV_NAME}"
                                 sh 'helm repo add --username $USERNAME --password $PASSWORD helm-nexus http://nexus-nexus-repository-manager:8081/repository/helm-repo/'
                                 sh 'helm repo update'
                                 sh 'helm repo list'
