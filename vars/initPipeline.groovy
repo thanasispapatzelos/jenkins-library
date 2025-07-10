@@ -7,7 +7,7 @@ def call(Map config = [:]) {
     pipeline {
             agent {
                 kubernetes {
-                    yaml libraryResource('podTemplates/mvn-docker-helm.yaml')
+                    yaml libraryResource('podTemplates/initial-agent.yaml')
                 }
             }   
 
