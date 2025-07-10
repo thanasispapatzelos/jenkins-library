@@ -12,7 +12,7 @@ class PushDockerImage implements Serializable {
     }
 
     def execute() {
-        steps.container('docker-cli') {
+        steps.container('docker') {
             steps.script {
                 steps.docker.withRegistry("http://${env.NEXUS_REGISTRY}", env.DOCKER_CREDS_ID) {
                     image.push(env.BUILD_NUMBER)
