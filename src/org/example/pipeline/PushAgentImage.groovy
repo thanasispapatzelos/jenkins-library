@@ -1,10 +1,10 @@
 package org.example.pipeline
 
-class BuildAgentImage implements Serializable {
+class PushAgentImage implements Serializable {
     def steps
     def env
 
-    BuildAgentImage(steps, env) {
+    PushAgentImage(steps, env) {
         this.steps = steps
         this.env = env
     }
