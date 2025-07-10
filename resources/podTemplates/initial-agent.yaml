@@ -8,14 +8,12 @@ spec:
     - name: docker-initial
       image: docker:25.0.3-cli  # Lightweight Docker CLI-only image
       volumeMounts:
-        - name: docker-socket
-          mountPath: /var/run/docker.sock
-      securityContext:
-        runAsUser: 0    
+        - name: docker-socket_initial
+          mountPath: /var/run/docker.sock 
       command: ["cat"]
       tty: true  
   volumes:
-    - name: docker-socket
+    - name: docker-socket_initial
       hostPath:
         path: /var/run/docker.sock
         type: Socket     
