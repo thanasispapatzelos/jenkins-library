@@ -10,7 +10,7 @@ class BuildAgentImage implements Serializable {
     }
 
     def execute() {
-        steps.container('docker-initial') {
+        steps.container('docker') {
             steps.script {
                 def dockerfileText = steps.libraryResource('docker/Dockerfile')
                 steps.writeFile file: 'Dockerfile', text: dockerfileText
