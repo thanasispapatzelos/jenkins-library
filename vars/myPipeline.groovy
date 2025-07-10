@@ -5,7 +5,11 @@ def agentImage
 
 def call(Map config = [:]) {
     pipeline {
-            agent any 
+            agent {
+                        kubernetes {
+                            yaml libraryResource('podTemplates/initial-agent.yaml')
+                        }
+                    }  
 
             environment { 
             //KUBECONFIG = "${WORKSPACE}/kubeconfig"  // kubectl will use this path
@@ -17,13 +21,7 @@ def call(Map config = [:]) {
 
             stages {
 
-                stage('Init') {
-                    agent {
-                        kubernetes {
-                            yaml libraryResource('podTemplates/initial-agent.yaml')
-                        }
-                    }  
-                    
+                stage('Init') {    
                     steps {
                         script {
                             env.ENV_NAME = config.envName ?: 'dev'
@@ -31,12 +29,7 @@ def call(Map config = [:]) {
                     }
                 }
 
-                stage('Built-docker-agent') {
-                    agent {
-                        kubernetes {
-                            yaml libraryResource('podTemplates/initial-agent.yaml')
-                        }
-                    }  
+                stage('Built-docker-agent') { 
                     steps {
                         script {
                             def buildStage = new org.example.pipeline.BuildAgentImage(this, env)
