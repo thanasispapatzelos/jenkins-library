@@ -16,7 +16,7 @@ class PushAgentImage implements Serializable {
             steps.script {
                 steps.script {
                     steps.docker.withRegistry("http://${env.NEXUS_REGISTRY}", env.DOCKER_CREDS_ID) {
-                    agentImage.push(env.BUILD_NUMBER)
+                    agentImage.push('myversion')
                     }
                 }
             }
