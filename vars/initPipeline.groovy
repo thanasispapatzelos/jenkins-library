@@ -35,7 +35,7 @@ def call(Map config = [:]) {
                 stage('Push-docker-agent') {
                     steps {
                       script {
-                            def pushStage = new org.example.pipeline.PushAgentImage(this, env)
+                            def pushStage = new org.example.pipeline.PushAgentImage(this, agentImage,env)
                             pushStage.execute()
                         }
                     }

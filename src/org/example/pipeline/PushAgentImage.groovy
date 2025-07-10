@@ -3,10 +3,12 @@ package org.example.pipeline
 class PushAgentImage implements Serializable {
     def steps
     def env
+    def agentImage
 
-    PushAgentImage(steps, env) {
+    PushAgentImage(steps, agentImage, env) {
         this.steps = steps
         this.env = env
+        this.agentImage = agentImage
     }
 
     def execute() {
