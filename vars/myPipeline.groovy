@@ -11,7 +11,7 @@ def call(Map config = [:]) {
             }   
 
             environment { 
-            KUBECONFIG = "${WORKSPACE}/kubeconfig"  // kubectl will use this path
+            //KUBECONFIG = "${WORKSPACE}/kubeconfig"  // kubectl will use this path
             DOCKER_CREDS_ID = 'nexus-creds' 
             NEXUS_REGISTRY = 'nexus.docker:30050'
             NEXUS_HELM_REGISTRY = 'http://nexus-nexus-repository-manager:8081/repository/helm-repo/'
