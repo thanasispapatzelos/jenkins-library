@@ -15,7 +15,7 @@ class InstallHelmChart implements Serializable {
                 steps.echo "Deploying to ${env.ENV_NAME}"
 
                 steps.sh """
-                    helm repo add --username \$USERNAME --password \$PASSWORD helm-nexus ${NEXUS_HELM_REGISTRY}
+                    helm repo add --username \$USERNAME --password \$PASSWORD helm-nexus ${env.NEXUS_HELM_REGISTRY}
                     helm repo update
                     helm repo list
                     helm upgrade --install helm-nexus helm-nexus/my-chart \\

@@ -61,7 +61,7 @@ def call(Map config = [:]) {
                 stage('Package-Push-chart') {
                     steps {
                         script {
-                            def packagePushChartStage = new PackagePushChart(this,env.NEXUS_HELM_REGISTRY)
+                            def packagePushChartStage = new PackagePushChart(this,env)
                             packagePushChartStage.execute()
                         }
                     }
