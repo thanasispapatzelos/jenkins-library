@@ -36,7 +36,7 @@ def call(Map config = [:]) {
                     steps {
                       script {
                             def pushStage = new org.example.pipeline.PushAgentImage(this, env)
-                            agentImage = pushStage.execute()
+                            pushStage.execute()
                         }
                     }
                 }
