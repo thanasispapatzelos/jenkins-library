@@ -1,7 +1,7 @@
 import org.example.pipeline.*
 
 def myImage
-def agentImage
+
 
 def call(Map config = [:]) {
     pipeline {
@@ -29,17 +29,6 @@ def call(Map config = [:]) {
                         }
                     }
                 }
-
-
-                //stage('Built-docker-agent') {
-                  //  steps {
-                      //  script {
-                    //        def buildStage = new org.example.pipeline.BuildDockerImage(this, env)
-                        //    agentImage = buildStage.execute()
-                        //}
-                   // }
-                //}
-
 
                 stage('Checkout') {
                     steps {
