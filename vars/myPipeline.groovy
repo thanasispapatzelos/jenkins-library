@@ -39,7 +39,7 @@ def call(Map config = [:]) {
                     }  
                     steps {
                         script {
-                            def buildStage = new org.example.pipeline.BuildDockerImage(this, env)
+                            def buildStage = new org.example.pipeline.BuildAgentImage(this, env)
                             agentImage = buildStage.execute()
                         }
                     }
