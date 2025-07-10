@@ -5,7 +5,7 @@ metadata:
 spec:
   dnsPolicy: ClusterFirst 
   containers:
-    - name: docker-cli
+    - name: docker-initial
       image: docker:25.0.3-cli  # Lightweight Docker CLI-only image
       volumeMounts:
         - name: docker-socket
