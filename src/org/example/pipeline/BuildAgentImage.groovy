@@ -11,7 +11,7 @@ class BuildAgentImage implements Serializable {
 
     def execute() {
         steps.script {
-            def dockerfileText = steps.libraryResource('org/example/pipeline/Dockerfile')
+            def dockerfileText = steps.libraryResource('docker/Dockerfile')
             steps.writeFile file: 'Dockerfile', text: dockerfileText
 
             def image = steps.docker.build("${env.NEXUS_REGISTRY}/quarkus:${env.BUILD_NUMBER}")
