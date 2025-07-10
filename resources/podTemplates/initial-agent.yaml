@@ -10,6 +10,8 @@ spec:
       volumeMounts:
         - name: docker-socket
           mountPath: /var/run/docker.sock
+      securityContext:
+        runAsUser: 0    
       command: ["cat"]
       tty: true  
   volumes:
