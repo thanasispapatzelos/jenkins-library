@@ -5,7 +5,7 @@ def agentImage
 
 def call(Map config = [:]) {
     pipeline {
-            agent none 
+            agent any 
 
             environment { 
             //KUBECONFIG = "${WORKSPACE}/kubeconfig"  // kubectl will use this path
