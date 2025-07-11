@@ -11,7 +11,7 @@ class InstallHelmChart implements Serializable {
 
     def execute() {
         steps.container('helm') {
-            steps.helmWithKubeconfig {
+            //steps.helmWithKubeconfig {
                 steps.echo "Deploying to ${env.ENV_NAME}"
 
                 steps.sh """
@@ -22,7 +22,7 @@ class InstallHelmChart implements Serializable {
                         --version 0.1.${env.BUILD_NUMBER} \\
                         -n jenkins 
                 """
-            }
+           // }
             //--set image.repository=${env.NEXUS_REGISTRY}/quarkus \\
             //--set image.tag=${env.BUILD_NUMBER}
         }
