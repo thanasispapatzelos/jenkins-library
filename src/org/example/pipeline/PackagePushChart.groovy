@@ -11,7 +11,7 @@ class PackagePushChart implements Serializable {
 
     def execute() {
         steps.container('helm') {
-            steps.helmWithKubeconfig {
+            //steps.helmWithKubeconfig {
                 steps.sh """
                     cd ./my-chart/
                     sed -i "s/^version:.*/version: 0.1.${env.BUILD_NUMBER}/" Chart.yaml
@@ -21,7 +21,7 @@ class PackagePushChart implements Serializable {
                     helm package .
                     curl -u \$USERNAME:\$PASSWORD --upload-file my-chart-0.1.${env.BUILD_NUMBER}.tgz ${env.NEXUS_HELM_REGISTRY}
                 """
-            }
+           // }
         }
     }
 }
