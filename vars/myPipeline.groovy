@@ -80,14 +80,14 @@ def call(Map config = [:]) {
 
                
 
-                stage('Add-install-nexus-chart') {
-                    steps {
-                        script {
-                            def installer = new InstallHelmChart(this, env)
-                            installer.execute()
-                        }
-                    }
-                }   
+                //stage('Add-install-nexus-chart') {
+                //    steps {
+               //         script {
+               //             def installer = new InstallHelmChart(this, env)
+               //             installer.execute()
+                //        }
+                 //   }
+                //}   
                 
 
 
