@@ -13,7 +13,7 @@ class PackagePushChart implements Serializable {
         steps.container('helm') {
             steps.helmWithKubeconfig {
                 steps.sh """
-                    cd /my-chart
+                    cd ./my-chart/
                     sed -i "s/^version:.*/version: 0.1.${env.BUILD_NUMBER}/" Chart.yaml
                     helm lint .
                     helm package .
