@@ -14,10 +14,10 @@ class PackagePushChart implements Serializable {
             steps.helmWithKubeconfig {
                 steps.sh """
                     cd helm/my-chart
-                    sed -i "s/^version:.*/version: 0.1.${BUILD_NUMBER}/" Chart.yaml
+                    sed -i "s/^version:.*/version: 0.1.${env.BUILD_NUMBER}/" Chart.yaml
                     helm lint .
                     helm package .
-                    curl -u \$USERNAME:\$PASSWORD --upload-file my-chart-0.1.${BUILD_NUMBER}.tgz ${env.NEXUS_HELM_REGISTRY}
+                    curl -u \$USERNAME:\$PASSWORD --upload-file my-chart-0.1.${env.BUILD_NUMBER}.tgz ${env.NEXUS_HELM_REGISTRY}
                 """
             }
         }
