@@ -15,6 +15,8 @@ class PackagePushChart implements Serializable {
                 steps.sh """
                     cd ./my-chart/
                     sed -i "s/^version:.*/version: 0.1.${env.BUILD_NUMBER}/" Chart.yaml
+                    sed -i 's|^\(\s*repository:\s*\).*|\1${env.NEXUS_REGISTRY}/quarkus|' values.yaml
+                    sed -i 's|^\(\s*tag:\s*\).*|\1${env.BUILD_NUMBER}|' values.yaml
                     helm lint .
                     helm package .
                     curl -u \$USERNAME:\$PASSWORD --upload-file my-chart-0.1.${env.BUILD_NUMBER}.tgz ${env.NEXUS_HELM_REGISTRY}

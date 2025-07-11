@@ -20,11 +20,11 @@ class InstallHelmChart implements Serializable {
                     helm repo list
                     helm upgrade --install helm-nexus helm-nexus/my-chart \\
                         --version 0.1.${env.BUILD_NUMBER} \\
-                        -n jenkins \\
-                        --set image.repository=${env.NEXUS_REGISTRY}/quarkus \\
-                        --set image.tag=${env.BUILD_NUMBER}
+                        -n jenkins 
                 """
             }
+            //--set image.repository=${env.NEXUS_REGISTRY}/quarkus \\
+            //--set image.tag=${env.BUILD_NUMBER}
         }
     }
 }
