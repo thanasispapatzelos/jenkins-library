@@ -21,7 +21,7 @@ class InstallHelmChart implements Serializable {
                     helm upgrade --install helm-nexus helm-nexus/my-chart \\
                         --version 0.1.${env.BUILD_NUMBER} \\
                         -n jenkins \\
-                        --set image.repository=nexus.docker:30050/quarkus \\
+                        --set image.repository=${env.NEXUS_REGISTRY}/quarkus \\
                         --set image.tag=${env.BUILD_NUMBER}
                 """
             }
