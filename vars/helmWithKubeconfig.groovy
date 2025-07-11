@@ -3,7 +3,7 @@ def call(Closure body) {
         withEnv(["KUBECONFIG=$KUBECONFIG_FILE"]) {
             sh '''
                 # Replace IP in kubeconfig
-                sed -i 's|127.0.0.1|host.docker.internal|g' $KUBECONFIG
+                #sed -i 's|127.0.0.1|host.docker.internal|g' $KUBECONFIG
             '''
             body()
         }
