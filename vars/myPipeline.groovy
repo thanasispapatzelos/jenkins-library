@@ -59,6 +59,14 @@ def call(Map config = [:]) {
                     }
                 }
                 
+                stage('Push-docker-image') {
+                    steps {
+                        script {
+                            def pushDockerStage = new PushDockerImage(this, myImage, env)
+                            pushDockerStage.execute()
+                        }
+                    }
+                }
 
                 stage('Package-Push-chart') {
                     steps {
@@ -70,14 +78,7 @@ def call(Map config = [:]) {
                 }
                 
 
-                stage('Push-docker-image') {
-                    steps {
-                        script {
-                            def pushDockerStage = new PushDockerImage(this, myImage, env)
-                            pushDockerStage.execute()
-                        }
-                    }
-                }
+               
 
                 stage('Add-install-nexus-chart') {
                     steps {
