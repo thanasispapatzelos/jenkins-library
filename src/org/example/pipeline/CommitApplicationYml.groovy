@@ -1,10 +1,10 @@
 package org.example.pipeline
 
-class PackagePushChart implements Serializable {
+class CommitApplicationYml implements Serializable {
     def steps
     def env
 
-    PackagePushChart(steps, env) {
+    CommitApplicationYml(steps, env) {
         this.steps = steps
         this.env = env
     }
