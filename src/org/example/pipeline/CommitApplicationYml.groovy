@@ -11,15 +11,16 @@ class CommitApplicationYml implements Serializable {
 
     def execute() {
                 steps.container('helm') {
+                steps.withCredentials([steps.string(credentialsId: env.GIT_CREDENTIALS_ID , variable: 'GITHUB_PAT')]) {
                     steps.sh """
-
-                       git remote set-url origin https://x-access-token:${env.GIT_CREDENTIALS_ID}@github.com/PapatzelosThanashs/quarkus.git
+                       git config --global --add safe.directory 
+                       git remote set-url origin https://x-access-token:\$GITHUB_PAT@github.com/PapatzelosThanashs/quarkus.git
 
                         git add Application.yml
                         git commit -m "Update Application.yml from pipeline" || echo "No changes"
                         git push 
                     """
+                    }
                 }
-
         }
 }
