@@ -20,7 +20,7 @@ class CommitApplicationYml implements Serializable {
 
                         git add Application.yaml
                         git commit -m "Update Application.yml from pipeline" || echo "No changes"
-                        git push origin HEAD:main
+                        git push origin HEAD:master
                     """
                     }
                 }
