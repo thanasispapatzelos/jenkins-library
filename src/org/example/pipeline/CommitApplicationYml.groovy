@@ -16,7 +16,7 @@ class CommitApplicationYml implements Serializable {
                         git config --global --add safe.directory .
                         git remote set-url origin https://x-access-token:\$GITHUB_PAT@github.com/PapatzelosThanashs/quarkus.git
                           git config user.email "papatzelosthanashs@gmail.com"
-                          git config user.name "PapatzelosThanashs-ci"
+                          git config user.name "PapatzelosThanashs"
 
                         git add Application.yaml
                         git commit -m "Update Application.yml from pipeline" || echo "No changes"
