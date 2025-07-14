@@ -18,6 +18,10 @@ def call(Map config = [:]) {
             NEXUS_REGISTRY = 'nexus-nexus-repository-manager:5000'
             NEXUS_HELM_REGISTRY = 'http://nexus-nexus-repository-manager:8081/repository/helm-repo/'
             //IMAGE_TAG = 'myversion'
+            GIT_CREDENTIALS_ID = 'github-credentials-id'  // Jenkins credential ID for GitHub
+            REPO_URL = 'https://github.com/PapatzelosThanashs/quarkus.git'
+            BRANCH = 'main'
+
             }
 
             stages {
@@ -89,7 +93,23 @@ def call(Map config = [:]) {
                  //   }
                 //}   
                 
+            stage('editApplicationYml') {
+                    steps {
+                        script {
+                            def editApplicationYml = new EditApplicationYml(this,env)
+                            editApplicationYml.execute()
+                        }
+                    }
+                }
 
+            stage('Deploy-commitApplicationYml') {
+                    steps {
+                        script {
+                            def commitApplicationYml = new CommitApplicationYml(this,env)
+                            commitApplicationYml.execute()
+                        }
+                    }
+            }    
 
             }
     }
