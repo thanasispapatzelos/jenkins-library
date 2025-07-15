@@ -54,6 +54,16 @@ def call(Map config = [:]) {
                     }
                 }
 
+
+                stage('editChartValues') {
+                    steps {
+                        script {
+                            def editChartValues = new EditChartValues(this,env)
+                            editChartValues.execute()
+                        }
+                    }
+                }
+
                 stage('Build-image') {
                     steps {
                         script {
@@ -93,7 +103,7 @@ def call(Map config = [:]) {
                  //   }
                 //}   
                 
-            stage('editApplicationYml') {
+            /*stage('editApplicationYml') {
                     steps {
                         script {
                             def editApplicationYml = new EditApplicationYml(this,env)
@@ -110,6 +120,9 @@ def call(Map config = [:]) {
                         }
                     }
             }    
+            */
+           
+
 
             }
     }
