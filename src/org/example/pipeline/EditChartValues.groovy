@@ -25,6 +25,15 @@ class EditChartValues implements Serializable {
 
                 cat values.yml
 
+                git config --global --add safe.directory .
+                git remote set-url origin https://x-access-token:\$GITHUB_PAT@github.com/PapatzelosThanashs/GitOps.git
+                git config user.email "papatzelosthanashs@gmail.com"
+                git config user.name "PapatzelosThanashs"
+
+                git add values.yml
+                git commit -m "Update values.yml from pipeline" || echo "No changes"
+                git push origin HEAD:master
+
             """
         }
     }
