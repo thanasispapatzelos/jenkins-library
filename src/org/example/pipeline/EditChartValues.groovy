@@ -22,7 +22,7 @@ class EditChartValues implements Serializable {
 
                     # Update repository
                     sed -i "s|^\\(\\s*repository:\\s*\\).*|\\1host.docker.internal:30050/quarkus|" values.yaml
-                    sed -i "s|^\\(\\s*tag:\\s*\\).*|\\1\\"0.1.${env.BUILD_NUMBER}\\"|" values.yaml
+                    sed -i "s|^\\(\\s*tag:\\s*\\).*|\\1\\"${env.BUILD_NUMBER}\\"|" values.yaml
 
                     cat values.yaml
 
