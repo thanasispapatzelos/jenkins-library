@@ -7,6 +7,8 @@ class Checkout implements Serializable {
     }
 
     def execute() {
-        steps.checkout steps.scm  // use pipeline DSL 'checkout' step and scm var
+        //steps.checkout steps.scm  // use pipeline DSL 'checkout' step and scm var
+        steps.git url: 'https://github.com/PapatzelosThanashs/quarkus.git', branch: 'master'
+
     }
 }
