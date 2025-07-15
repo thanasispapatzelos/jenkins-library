@@ -21,17 +21,17 @@ class EditChartValues implements Serializable {
                     cd GitOps/apps/dev
 
                     # Update repository
-                    sed -i "s|^\\(\\s*repository:\\s*\\).*|\\1host.docker.internal:30050/quarkus|" values.yml
-                    sed -i "s|^\\(\\s*tag:\\s*\\).*|\\1\\"0.1.${env.BUILD_NUMBER}\\"|" values.yml
+                    sed -i "s|^\\(\\s*repository:\\s*\\).*|\\1host.docker.internal:30050/quarkus|" values.yaml
+                    sed -i "s|^\\(\\s*tag:\\s*\\).*|\\1\\"0.1.${env.BUILD_NUMBER}\\"|" values.yaml
 
-                    cat values.yml
+                    cat values.ayml
 
                     git remote set-url origin https://x-access-token:\$GITHUB_PAT@github.com/PapatzelosThanashs/GitOps.git
                     git config user.email "papatzelosthanashs@gmail.com"
                     git config user.name "PapatzelosThanashs"
 
-                    git add values.yml
-                    git commit -m "Update values.yml from pipeline" || echo "No changes"
+                    git add values.yaml
+                    git commit -m "Update values.yaml from pipeline" || echo "No changes"
                     git push origin HEAD:master
 
                 """
