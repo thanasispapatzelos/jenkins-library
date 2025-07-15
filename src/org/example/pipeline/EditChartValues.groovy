@@ -18,6 +18,13 @@ class EditChartValues implements Serializable {
             steps.sh """
 
                 cd GitOps/apps/dev
+
+                # Update repository
+                sed -i "s|^\(\s*repository:\s*\).*|\1${env.NEXUS_REGISTRY}/quarkus|" values.yaml
+
+                # Update tag
+                sed -i "s|^\(\s*tag:\s*\).*|\1\"0.1.${env.BUILD_NUMBER}\"|" values.yaml
+
                 cat values.yml
 
             """
