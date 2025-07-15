@@ -44,14 +44,6 @@ def call(Map config = [:]) {
                     }
                 }
 
-                stage('editChartValues') {
-                    steps {
-                        script {
-                            def editChartValues = new EditChartValues(this,env)
-                            editChartValues.execute()
-                        }
-                    }
-                }
 
                 stage('Build-jar') {
                     steps {
@@ -122,7 +114,14 @@ def call(Map config = [:]) {
                     }
             }    
             */
-           
+           stage('editChartValues') {
+                    steps {
+                        script {
+                            def editChartValues = new EditChartValues(this,env)
+                            editChartValues.execute()
+                        }
+                    }
+                }
 
 
             }
