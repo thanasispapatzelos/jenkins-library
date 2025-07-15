@@ -24,7 +24,7 @@ class EditChartValues implements Serializable {
                     sed -i "s|^\\(\\s*repository:\\s*\\).*|\\1host.docker.internal:30050/quarkus|" values.yaml
                     sed -i "s|^\\(\\s*tag:\\s*\\).*|\\1\\"0.1.${env.BUILD_NUMBER}\\"|" values.yaml
 
-                    cat values.ayml
+                    cat values.yaml
 
                     git remote set-url origin https://x-access-token:\$GITHUB_PAT@github.com/PapatzelosThanashs/GitOps.git
                     git config user.email "papatzelosthanashs@gmail.com"
