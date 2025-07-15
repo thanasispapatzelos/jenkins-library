@@ -16,7 +16,7 @@ class EditChartValues implements Serializable {
                 steps.git url: 'https://github.com/PapatzelosThanashs/GitOps.git', branch: 'master'
             }
             steps.sh """
-
+                git config --global --add safe.directory /home/jenkins/agent/workspace/mypipeline/GitOps
                 cd GitOps/apps/dev
 
                 # Update repository
