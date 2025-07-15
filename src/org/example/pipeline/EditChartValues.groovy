@@ -15,26 +15,27 @@ class EditChartValues implements Serializable {
             steps.dir('GitOps') {
                 steps.git url: 'https://github.com/PapatzelosThanashs/GitOps.git', branch: 'master'
             }
-            steps.sh """
-                git config --global --add safe.directory /home/jenkins/agent/workspace/mypipeline/GitOps
-                cd GitOps/apps/dev
+            steps.withCredentials([steps.string(credentialsId: env.GIT_CREDENTIALS_ID , variable: 'GITHUB_PAT')]) {
+                steps.sh """
+                    git config --global --add safe.directory /home/jenkins/agent/workspace/mypipeline/GitOps
+                    cd GitOps/apps/dev
 
-                # Update repository
-                sed -i "s|^\\(\\s*repository:\\s*\\).*|\\1host.docker.internal:30050/quarkus|" values.yml
-                sed -i "s|^\\(\\s*tag:\\s*\\).*|\\1\\"0.1.${env.BUILD_NUMBER}\\"|" values.yml
+                    # Update repository
+                    sed -i "s|^\\(\\s*repository:\\s*\\).*|\\1host.docker.internal:30050/quarkus|" values.yml
+                    sed -i "s|^\\(\\s*tag:\\s*\\).*|\\1\\"0.1.${env.BUILD_NUMBER}\\"|" values.yml
 
-                cat values.yml
+                    cat values.yml
 
-                git config --global --add safe.directory .
-                git remote set-url origin https://x-access-token:\$GITHUB_PAT@github.com/PapatzelosThanashs/GitOps.git
-                git config user.email "papatzelosthanashs@gmail.com"
-                git config user.name "PapatzelosThanashs"
+                    git remote set-url origin https://x-access-token:\$GITHUB_PAT@github.com/PapatzelosThanashs/GitOps.git
+                    git config user.email "papatzelosthanashs@gmail.com"
+                    git config user.name "PapatzelosThanashs"
 
-                git add values.yml
-                git commit -m "Update values.yml from pipeline" || echo "No changes"
-                git push origin HEAD:master
+                    git add values.yml
+                    git commit -m "Update values.yml from pipeline" || echo "No changes"
+                    git push origin HEAD:master
 
-            """
+                """
+            }
         }
     }
 }
