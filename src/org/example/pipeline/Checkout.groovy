@@ -7,6 +7,8 @@ class Checkout implements Serializable {
     }
 
     def execute() {
-        steps.checkout steps.scm  // use pipeline DSL 'checkout' step and scm var
+        steps.container('helm') {
+            steps.checkout steps.scm  // use pipeline DSL 'checkout' step and scm var
+        }
     }
 }
