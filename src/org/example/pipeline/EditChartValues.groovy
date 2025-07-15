@@ -17,7 +17,8 @@ class EditChartValues implements Serializable {
             }
             steps.sh """
 
-                ls -l 
+                cd GitOps/apps/dev
+                cat values.yml
 
             """
         }
