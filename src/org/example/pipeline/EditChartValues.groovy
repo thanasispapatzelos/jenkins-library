@@ -17,7 +17,8 @@ class EditChartValues implements Serializable {
             }
             steps.withCredentials([steps.string(credentialsId: env.GIT_CREDENTIALS_ID , variable: 'GITHUB_PAT')]) {
                 steps.sh """
-                    git config --global --add safe.directory /home/jenkins/agent/workspace/mypipeline/GitOps
+                    
+                    git config --global --add safe.directory /home/jenkins/agent/workspace/multi_master/GitOps
                     cd GitOps/apps/dev
 
                     # Update repository
